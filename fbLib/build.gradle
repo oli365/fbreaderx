@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 group='com.github.oli365'
 
 android {
@@ -12,8 +12,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 103
-        versionName "1.0.3"
+        versionCode 104
+        versionName "1.0.4"
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
@@ -38,7 +38,7 @@ android {
     sourceSets {
         main {
             jni.srcDirs = []//设置禁止gradle生成Android.mk
-            jniLibs.srcDirs = ['src/main/jniLibs']//设置目标的so存放路径
+//            jniLibs.srcDirs = ['src/main/jniLibs']//设置目标的so存放路径
         }
     }
 
