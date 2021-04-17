@@ -1,10 +1,11 @@
 package org.geometerplus.android.fbreader.image;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,7 +22,7 @@ import org.geometerplus.zlibrary.ui.android.image.ZLAndroidImageData;
 import org.geometerplus.zlibrary.ui.android.library.ZLAndroidLibrary;
 import org.geometerplus.zlibrary.ui.android.util.ZLAndroidColorUtil;
 
-public class ImageViewActivity extends Activity implements View.OnClickListener{
+public class ImageViewActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final String URL_KEY = "fbreader.imageview.url";
     public static final String BACKGROUND_COLOR_KEY = "fbreader.imageview.background";

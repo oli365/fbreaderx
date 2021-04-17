@@ -145,15 +145,16 @@ class ProcessHyperlinkAction extends FBAndroidAction {
             final String url = ((ZLTextImageRegionSoul) soul).ImageElement.URL;
             if (url != null) {
                 try {
-                    final Intent intent = new Intent();
-                    intent.setClass(BaseActivity,ImageViewActivity.class);
-                    intent.putExtra(ImageViewActivity.URL_KEY, url);
-                    intent.putExtra(
-                            ImageViewActivity.BACKGROUND_COLOR_KEY,
-                            Reader.ImageOptions.ImageViewBackground.getValue().intValue()
-                    );
-                    OrientationUtil.startActivity(BaseActivity, intent);
-                    BaseActivity.overridePendingTransition(R.anim.activity_anim_no, R.anim.activity_anim_no);
+                      //oli 图片禁止放大
+//                    final Intent intent = new Intent();
+//                    intent.setClass(BaseActivity,ImageViewActivity.class);
+//                    intent.putExtra(ImageViewActivity.URL_KEY, url);
+//                    intent.putExtra(
+//                            ImageViewActivity.BACKGROUND_COLOR_KEY,
+//                            Reader.ImageOptions.ImageViewBackground.getValue().intValue()
+//                    );
+//                    OrientationUtil.startActivity(BaseActivity, intent);
+//                    BaseActivity.overridePendingTransition(R.anim.activity_anim_no, R.anim.activity_anim_no);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
