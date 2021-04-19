@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.fbreader.common.FBReaderHelper;
 import com.fbreader.common.IRefresh;
 import com.fbreader.view.adapter.MarkersAdapter;
@@ -51,16 +53,17 @@ public class MarkersFragment extends Fragment implements IRefresh, IBookCollecti
         super.onActivityCreated(savedInstanceState);
 
         adapter = new MarkersAdapter(null);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
                 fbReaderHelper.gotoBookMark(getActivity(), (Bookmark) adapter.getItem(position));
                 ZLApplication.Instance().runAction(ActionCode.HIDE_TOC);
             }
         });
-        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+
+        adapter.setOnItemChildClickListener(new OnItemChildClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemChildClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
                 ZLApplication.Instance().runAction(ActionCode.SHOW_BOOKMARK, adapter.getItem(position));
             }
         });

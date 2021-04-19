@@ -3,7 +3,7 @@ package com.fbreader.view.adapter;
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 
 import org.geometerplus.fbreader.book.Bookmark;
 import org.geometerplus.zlibrary.ui.android.R;
@@ -20,8 +20,8 @@ public class MarkersAdapter extends BaseQuickAdapter<Bookmark, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, Bookmark item) {
         helper.setText(R.id.txtMarker, item.getText())
-                .setText(R.id.txtContent, item.getOriginalText())
-                .addOnClickListener(R.id.edtToEdit);
+                .setText(R.id.txtContent, item.getOriginalText());
+//                .addOnClickListener(R.id.edtToEdit);
     }
 
 }

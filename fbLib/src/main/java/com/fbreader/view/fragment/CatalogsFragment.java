@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.fbreader.view.adapter.CatalogsAdapter;
 import com.fbreader.common.FBReaderHelper;
 import com.fbreader.util.FragmentUtils;
@@ -44,15 +45,17 @@ public class CatalogsFragment extends Fragment implements IRefresh {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         adapter = new CatalogsAdapter(null);
-        adapter.closeLoadAnimation();
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(@NonNull BaseQuickAdapter adapter, @NonNull View view, int position) {
                 TOCTree tocTree = (TOCTree) adapter.getItem(position);
                 fbReaderHelper.openBookTo(tocTree);
                 FragmentUtils.hide(getParentFragment());
+
             }
         });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
