@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         fbReaderHelper = FBReaderHelper(this)
         findViewById<View>(R.id.btn).setOnClickListener {
             fbReaderHelper!!.bindToService {
-                val book = fbReaderHelper!!.collection.getBookByFile("${ROOT_PATH}/test.epub")
+                val book = fbReaderHelper!!.collection.getBookByFile("${ROOT_PATH}/S391783.txt")
                 FBReader.openBook(this@MainActivity, book, null)
             }
         }
