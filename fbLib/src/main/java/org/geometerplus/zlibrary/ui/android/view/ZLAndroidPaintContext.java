@@ -376,25 +376,44 @@ public final class ZLAndroidPaintContext extends ZLPaintContext {
 
     @Override
     public void drawString(int x, int y, char[] string, int offset, int length) {
-        boolean containsSoftHyphen = false;
-        for (int i = offset; i < offset + length; ++i) {
-            if (string[i] == (char) 0xAD) {
-                containsSoftHyphen = true;
+//        boolean containsSoftHyphen = false;
+//        for (int i = offset; i < offset + length; ++i) {
+//            if (string[i] == (char) 0xAD) {
+//                containsSoftHyphen = true;
+//                break;
+//            }
+//        }
+//        if (!containsSoftHyphen) {
+//            myCanvas.drawText(string, offset, length, x, y, myTextPaint);
+//        } else {
+//            final char[] corrected = new char[length];
+//            int len = 0;
+//            for (int o = offset; o < offset + length; ++o) {
+//                final char chr = string[o];
+//                if (chr != (char) 0xAD) {
+//                    corrected[len++] = chr;
+//                }
+//            }
+//            myCanvas.drawText(corrected, 0, len, x, y, myTextPaint);
+//        }
+        final char[] corrected = new char[length];
+        int len = 0;
+        for (int o = offset; o < offset + length; ++o) {
+            final char chr = string[o];
+            if (chr != (char)0xAD && chr!='§') {
+                corrected[len++] = chr;
+            }else if(chr=='§'){
+                corrected[len++] = ' ';
+            }else if(chr==(char)0xAD){
                 break;
             }
         }
-        if (!containsSoftHyphen) {
-            myCanvas.drawText(string, offset, length, x, y, myTextPaint);
-        } else {
-            final char[] corrected = new char[length];
-            int len = 0;
-            for (int o = offset; o < offset + length; ++o) {
-                final char chr = string[o];
-                if (chr != (char) 0xAD) {
-                    corrected[len++] = chr;
-                }
-            }
-            myCanvas.drawText(corrected, 0, len, x, y, myTextPaint);
+        if(myTextPaint.isFakeBoldText()){
+            myTextPaint.setTextSize((float)(myTextPaint.getTextSize()+4));
+        }
+        myCanvas.drawText(corrected, 0, len, x, y, myTextPaint);
+        if(myTextPaint.isFakeBoldText()){
+            myTextPaint.setTextSize((float)(myTextPaint.getTextSize()-4));
         }
     }
 

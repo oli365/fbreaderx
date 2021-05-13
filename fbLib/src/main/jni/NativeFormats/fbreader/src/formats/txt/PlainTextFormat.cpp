@@ -167,6 +167,7 @@ void PlainTextFormatDetector::detect(ZLInputStream &stream, PlainTextFormat &for
 		} else {
 			breakType |= PlainTextFormat::BREAK_PARAGRAPH_AT_LINE_WITH_INDENT;
 		}
+		breakType |= PlainTextFormat::BREAK_PARAGRAPH_AT_NEW_LINE;
 		format.myBreakType = (breakType);
 	}
 

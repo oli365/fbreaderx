@@ -12,7 +12,9 @@ import java.util.regex.Pattern;
 
 public class TxtCatalogsUtil {
 
-    private static final String ChapterPatternStr = "(\\s*第)(.{1,9})[章节卷集部篇回](.+)(\\s)";
+//    private static final String ChapterPatternStr = "(\\s*第)(.{1,9})[章节卷集部篇回](.+)(\\s)";
+
+    private static final String ChapterPatternStr = "(\\s*)(§{2})(.+)(\\s)";
 
     public static TOCTree parseTxtCatalogs(BookModel model) {
         ZLTextModel textModel = model.getTextModel();
@@ -51,7 +53,7 @@ public class TxtCatalogsUtil {
                         String catalogStr = textData.substring(startIndex, endIndex);
 
                         TOCTree tree = new TOCTree(model.TOCTree);
-                        tree.setText(catalogStr);
+                        tree.setText(catalogStr.replace("§§",""));
                         tree.setReference(textModel, i);
 
                         if (++catalogIndex >= starts.size()) {

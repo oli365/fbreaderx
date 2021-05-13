@@ -21,6 +21,7 @@ package org.geometerplus.fbreader.formats;
 
 import java.util.*;
 
+import org.geometerplus.fbreader.formats.txt.TxtPlugin;
 import org.geometerplus.zlibrary.core.drm.FileEncryptionInfo;
 import org.geometerplus.zlibrary.core.encodings.EncodingCollection;
 import org.geometerplus.zlibrary.core.encodings.JavaEncodingCollection;
@@ -43,7 +44,9 @@ public class NativeFormatPlugin extends BuiltinFormatPlugin {
 			return new FB2NativePlugin(systemInfo);
 		} else if ("ePub".equals(fileType)) {
 			return new OEBNativePlugin(systemInfo);
-		} else {
+		} else  if ("txt".equals(fileType)) {
+			return new TxtPlugin(systemInfo);
+		}{
 			return new NativeFormatPlugin(systemInfo, fileType);
 		}
 	}
