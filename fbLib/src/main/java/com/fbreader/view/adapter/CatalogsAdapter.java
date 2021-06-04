@@ -1,5 +1,7 @@
 package com.fbreader.view.adapter;
 
+import android.widget.BaseAdapter;
+
 import androidx.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -11,7 +13,7 @@ import org.geometerplus.zlibrary.ui.android.R;
 
 import java.util.List;
 
-public class CatalogsAdapter extends BaseQuickAdapter<TOCTree, BaseViewHolder> {
+public class CatalogsAdapter extends  BaseQuickAdapter<TOCTree, BaseViewHolder> {
 
     private int selectedIndex = -1;
 

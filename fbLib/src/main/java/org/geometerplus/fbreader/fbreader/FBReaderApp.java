@@ -140,6 +140,7 @@ public final class FBReaderApp extends ZLApplication {
 
         addAction(ActionCode.SELECTION_CLEAR, new SelectionClearAction(this));
 
+
         addAction(ActionCode.MOVE_CURSOR_UP, new MoveCursorAction(this, FBView.Direction.up));
         addAction(ActionCode.MOVE_CURSOR_DOWN, new MoveCursorAction(this, FBView.Direction.down));
         addAction(ActionCode.MOVE_CURSOR_LEFT, new MoveCursorAction(this, FBView.Direction.rightToLeft));

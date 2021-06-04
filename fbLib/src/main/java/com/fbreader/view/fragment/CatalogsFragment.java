@@ -19,7 +19,6 @@ import com.fbreader.common.IRefresh;
 
 import org.geometerplus.fbreader.bookmodel.TOCTree;
 import org.geometerplus.zlibrary.ui.android.R;
-
 import java.util.List;
 
 public class CatalogsFragment extends Fragment implements IRefresh {

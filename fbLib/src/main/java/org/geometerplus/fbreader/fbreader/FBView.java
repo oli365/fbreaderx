@@ -241,12 +241,13 @@ public final class FBView extends ZLTextView {
             if (soul instanceof ZLTextWordRegionSoul) {
                 switch (myReader.MiscOptions.WordTappingAction.getValue()) {
                     case startSelecting:
-                        myReader.runAction(ActionCode.SELECTION_HIDE_PANEL);
-                        initSelection(x, y);
-                        final SelectionCursor.Which cursor = findSelectionCursor(x, y);
-                        if (cursor != null) {
-                            moveSelectionCursorTo(cursor, x, y);
-                        }
+                        //oli 屏蔽选择文本
+//                        myReader.runAction(ActionCode.SELECTION_HIDE_PANEL);
+//                        initSelection(x, y);
+//                        final SelectionCursor.Which cursor = findSelectionCursor(x, y);
+//                        if (cursor != null) {
+//                            moveSelectionCursorTo(cursor, x, y);
+//                        }
                         return true;
                     case selectSingleWord:
                     case openDictionary:
