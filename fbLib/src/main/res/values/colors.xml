@@ -7,4 +7,7 @@
   <color name="white">#FFFFFF</color>
   <color name="dark_gray">#333333</color>
   <color name="light_gray">#AFFFFFFF</color>
+
+  <color name="select_color">#648ffd</color>
+  <color name="default_color">#8a8a8a</color>
 </resources>

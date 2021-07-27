@@ -3,15 +3,156 @@
     android:id="@+id/layoutRootView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <org.geometerplus.zlibrary.ui.android.view.ZLAndroidWidget
-        android:id="@+id/readerView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fadeScrollbars="false"
-        android:focusable="true"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="vertical" />
+        android:background="#ffffff"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_alignParentLeft="true"
+                android:padding="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back_white"
+                android:tint="#8a8a8a"/>
+            <TextView
+                android:id="@+id/tv_book_name"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#8e8e8e"
+                android:textSize="24sp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="70dp">
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:paddingRight="40dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/iv_back_home"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="13dp"
+                        android:elevation="2dp"
+                        android:background="@drawable/shape_circle_fb_menu"
+                        android:src="@drawable/ic_home" />
+
+                    <ImageView
+                        android:id="@+id/iv_book_catalog"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="15dp"
+                        android:elevation="2dp"
+                        android:background="@drawable/shape_circle_fb_menu"
+                        android:src="@drawable/ic_reader_catalog" />
+
+                    <ImageView
+                        android:id="@+id/iv_get_book_qrcode"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="13dp"
+                        android:elevation="2dp"
+                        android:background="@drawable/shape_circle_fb_menu"
+                        android:src="@drawable/ic_btn_qr_code" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_reader_last_page"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="2dp"
+                    android:src="@drawable/ic_reader_last_page" />
+
+
+            </RelativeLayout>
+            <org.geometerplus.zlibrary.ui.android.view.ZLAndroidWidget
+                android:id="@+id/readerView"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:focusable="true"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbars="vertical" />
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="40dp"
+                android:gravity="left">
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:id="@+id/iv_increase_font_size"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="13dp"
+                        android:elevation="2dp"
+                        android:background="@drawable/shape_circle_fb_menu"
+                        android:src="@drawable/ic_reader_increase_font" />
+                    <TextView
+                        android:id="@+id/tv_font_size"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20"
+                        android:textColor="#8e8e8e"
+                        android:textSize="20sp"/>
+                    <ImageView
+                        android:id="@+id/iv_decrease_font_size"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:padding="13dp"
+                        android:elevation="2dp"
+                        android:background="@drawable/shape_circle_fb_menu"
+                        android:src="@drawable/ic_reader_decrease_font" />
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/iv_reader_next_page"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="2dp"
+                    android:src="@drawable/ic_reader_next_page" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/layoutTOC"

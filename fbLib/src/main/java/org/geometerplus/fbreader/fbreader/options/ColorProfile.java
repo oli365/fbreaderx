@@ -167,7 +167,9 @@ public class ColorProfile {
 			WallpaperOption = new ZLStringOption("Colors", name + ":Wallpaper", "");
 			FillModeOption = new ZLEnumOption<ZLPaintContext.FillMode>("Colors", name + ":FillMode",
 					ZLPaintContext.FillMode.tile);
-			BackgroundOption = createOption(name, "Background", 214, 206, 197);
+			//oli 更改默认背景
+//			BackgroundOption = createOption(name, "Background", 214, 206, 197);
+			BackgroundOption = createOption(name, "Background", 254, 246, 237);
 			SelectionBackgroundOption = createOption(name, "SelectionBackground", 57, 136, 255);
 			SelectionForegroundOption = createNullOption(name, "SelectionForeground");
 			HighlightingBackgroundOption = createOption(name, "Highlighting", 255, 192, 128);

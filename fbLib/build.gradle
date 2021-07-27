@@ -10,7 +10,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 111
         versionName "1.1.1"
@@ -51,7 +51,9 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.1'
     implementation "androidx.core:core-ktx:1.3.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.king.zxing:zxing-lite:1.1.9-androidx'
 }
 repositories {
     mavenCentral()
+    maven { url 'https://dl.bintray.com/jenly/maven' }
 }

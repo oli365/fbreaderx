@@ -654,15 +654,17 @@ public final class FBView extends ZLTextView {
             final int left = getLeftMargin();
             final int right = context.getWidth() - getRightMargin();
             final int height = getHeight();
-            final int charHeight = setFont(context, height / 2, false);
+            // oli 修改底部字体大小
+            final int charHeight = setFont(context, height / 4, false);
 
             final PagePosition pagePosition = FBView.this.pagePosition();
 
             context.setTextColor(cProfile.RegularTextOption.getValue());
 
-            if (footerOptions.ShowBattery.getValue()) {
-                context.drawString(left, (height + charHeight + 1) / 2, "电池 " + myReader.getBatteryLevel() + "%");
-            }
+            // oli
+//            if (footerOptions.ShowBattery.getValue()) {
+//                context.drawString(left, (height + charHeight + 1) / 2, "电池 " + myReader.getBatteryLevel() + "%");
+//            }
             if (footerOptions.showProgressAsPages()) {
                 String str = pagePosition.Current + "/" + pagePosition.Total;
                 int strWidth = context.getStringWidth(str);
@@ -673,11 +675,11 @@ public final class FBView extends ZLTextView {
                 int strWidth = context.getStringWidth(str);
                 context.drawString((right - strWidth+left) / 2 , (height + charHeight + 1) / 2, str);
             }
-            if (footerOptions.ShowClock.getValue()) {
-                String str = ZLibrary.Instance().getCurrentTimeString();
-                int strWidth = context.getStringWidth(str);
-                context.drawString(right - strWidth, (height + charHeight + 1) / 2, str);
-            }
+//            if (footerOptions.ShowClock.getValue()) {
+//                String str = ZLibrary.Instance().getCurrentTimeString();
+//                int strWidth = context.getStringWidth(str);
+//                context.drawString(right - strWidth, (height + charHeight + 1) / 2, str);
+//            }
 
         }
     }

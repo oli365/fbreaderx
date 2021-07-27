@@ -77,6 +77,7 @@
         <activity
             android:name="org.geometerplus.android.fbreader.FBReader"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
             android:icon="@drawable/fbreader"
             android:label="@string/app_name"
             android:launchMode="singleTask"

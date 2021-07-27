@@ -3,6 +3,7 @@ package com.fbreader.view.adapter;
 import android.widget.BaseAdapter;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
@@ -25,6 +26,11 @@ public class CatalogsAdapter extends  BaseQuickAdapter<TOCTree, BaseViewHolder> 
     protected void convert(BaseViewHolder helper, TOCTree item) {
         helper.setText(R.id.txt, item.getText());
         helper.setGone(R.id.imgMark, helper.getLayoutPosition() == selectedIndex);
+        if(helper.getLayoutPosition() == selectedIndex){
+            helper.setTextColor(R.id.txt, R.color.select_color);
+        }else {
+            helper.setTextColor(R.id.txt, R.color.default_color);
+        }
     }
 
     public int setSelectItem(TOCTree selectItem) {

@@ -44,6 +44,9 @@ public class FBReaderHelper {
 
     private FBReaderApp myFBReaderApp;
 
+    OnFinishFBReaderListener onFinishFBReaderListener;
+    OnBackHomeListener onBackHomeListener;
+
     public FBReaderHelper(Activity activity) {
         this.activity = activity;
         myFBReaderApp = (FBReaderApp) FBReaderApp.Instance();
@@ -599,4 +602,32 @@ public class FBReaderHelper {
         void finish(boolean success, Bitmap bitmap);
     }
 
+
+    public interface OnFinishFBReaderListener{
+        void finishFBReader();
+    }
+
+    public interface OnBackHomeListener{
+        void backHome();
+    }
+
+    public void setOnFinishFBReaderListener(OnFinishFBReaderListener onFinishFBReaderListener) {
+        this.onFinishFBReaderListener = onFinishFBReaderListener;
+    }
+
+    public void setOnBackHomeListener(OnBackHomeListener onBackHomeListener) {
+        this.onBackHomeListener = onBackHomeListener;
+    }
+
+    public void onBackHome(){
+        if(onBackHomeListener != null){
+            onBackHomeListener.backHome();
+        }
+    }
+
+    public void onFinishFBReader(){
+        if(onFinishFBReaderListener != null){
+            onFinishFBReaderListener.finishFBReader();
+        }
+    }
 }

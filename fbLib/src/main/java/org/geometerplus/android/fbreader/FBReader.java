@@ -15,11 +15,15 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
-
+import android.widget.TextView;
+import com.fbreader.common.FBReaderHelper;
 import com.fbreader.util.FragmentUtils;
 import com.fbreader.common.IntentKey;
+import com.fbreader.view.dialog.BookQrCodeDialog;
 import com.fbreader.view.fragment.MarkerFragment;
 import com.fbreader.view.fragment.MenuFragment;
 import com.fbreader.view.fragment.TOCFragment;
@@ -51,6 +55,7 @@ import org.geometerplus.fbreader.fbreader.options.CancelMenuHelper;
 import org.geometerplus.fbreader.formats.ExternalFormatPlugin;
 import org.geometerplus.fbreader.formats.PluginCollection;
 import org.geometerplus.fbreader.tips.TipsManager;
+import org.geometerplus.zlibrary.core.application.ZLApplication;
 import org.geometerplus.zlibrary.core.application.ZLApplicationWindow;
 import org.geometerplus.zlibrary.core.filesystem.ZLFile;
 import org.geometerplus.zlibrary.core.options.Config;
@@ -97,6 +102,16 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
 
     private RelativeLayout myRootView;
     private ZLAndroidWidget myMainView;
+    private ImageView ivBack;
+    private TextView tvHeaderTitleName;
+    private ImageView ivBookCatalog;
+    private ImageView ivIncreaseFontSize;
+    private TextView tvFontSize;
+    private ImageView ivDecreaseFontSize;
+    private ImageView ivLastPage;
+    private ImageView ivNextPage;
+    private FBReaderHelper fbReaderHelper;
+    private String bookQrcodeLink;
 
     private volatile boolean myShowStatusBarFlag;
 
@@ -158,6 +173,7 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
             } else {
                 NotificationUtil.drop(this, myBook);
             }
+            tvHeaderTitleName.setText(myBook.getTitle());
         }
         Config.Instance().runOnConnect(new Runnable() {
             public void run() {
@@ -201,7 +217,7 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        bookQrcodeLink = getIntent().getStringExtra("book_qrcode_link");
         bindService(new Intent(this, DataService.class), DataConnection, DataService.BIND_AUTO_CREATE);
 
         final Config config = Config.Instance();
@@ -283,6 +299,7 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
         final Intent intent = getIntent();
         final String action = intent.getAction();
 
+
         myOpenBookIntent = intent;
         if ((intent.getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0) {
             if (FBReaderIntents.Action.CLOSE.equals(action)) {
@@ -308,6 +325,89 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
         markerFragment = MarkerFragment.newInstance(null);
         FragmentUtils.replace(getSupportFragmentManager(), markerFragment, R.id.layoutMarker);
         FragmentUtils.hide(markerFragment);
+        initActionView();
+
+    }
+
+    private void initActionView(){
+        ivBack = findViewById(R.id.iv_back);
+        tvHeaderTitleName = findViewById(R.id.tv_book_name);
+        ivBookCatalog = findViewById(R.id.iv_book_catalog);
+        ivIncreaseFontSize = findViewById(R.id.iv_increase_font_size);
+        ivDecreaseFontSize = findViewById(R.id.iv_decrease_font_size);
+        tvFontSize = findViewById(R.id.tv_font_size);
+        ivLastPage = findViewById(R.id.iv_reader_last_page);
+        ivNextPage = findViewById(R.id.iv_reader_next_page);
+        fbReaderHelper = new FBReaderHelper(getActivity());
+        fbReaderHelper.bindToService(new Runnable() {
+            @Override
+            public void run() {
+                tvFontSize.setText(fbReaderHelper.getFontSize() + "");
+                if(fbReaderHelper.getCurrentBook() != null){
+                    tvHeaderTitleName.setText(fbReaderHelper.getCurrentBook().getTitle());
+                }else if(myBook != null){
+                    tvHeaderTitleName.setText(myBook.getTitle());
+                }
+            }
+        });
+        ivBookCatalog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ZLApplication.Instance().runAction(ActionCode.SHOW_TOC);
+            }
+        });
+        ivIncreaseFontSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int fontSize = fbReaderHelper.getFontSize() + 2;
+                tvFontSize.setText(fontSize + "");
+                fbReaderHelper.setFontSize(fontSize);
+                fbReaderHelper.setTextFirstLineIndent(fontSize * 2);
+            }
+        });
+        ivDecreaseFontSize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int fontSize = fbReaderHelper.getFontSize() - 2;
+                tvFontSize.setText(fontSize + "");
+                fbReaderHelper.setFontSize(fontSize);
+                fbReaderHelper.setTextFirstLineIndent(fontSize * 2);
+            }
+        });
+        ivLastPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myFBReaderApp.runAction(ActionCode.TURN_PAGE_BACK);
+            }
+        });
+        ivNextPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myFBReaderApp.runAction(ActionCode.TURN_PAGE_FORWARD);
+            }
+        });
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                fbReaderHelper.onFinishFBReader();
+            }
+        });
+        findViewById(R.id.iv_get_book_qrcode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BookQrCodeDialog bookQrCodeDialog = new BookQrCodeDialog(FBReader.this,bookQrcodeLink);
+                bookQrCodeDialog.show();
+            }
+        });
+
+        findViewById(R.id.iv_back_home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fbReaderHelper.onBackHome();
+            }
+        });
+
     }
 
     @Override
@@ -720,7 +820,8 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        showMenu();
+        // oli
+//        showMenu();
         return true;
     }
 
@@ -903,8 +1004,9 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
     }
 
     public void showMenu() {
-        FragmentUtils.show(menuFramgent);
-        fullscreen(false);
+        //oli
+//        FragmentUtils.show(menuFramgent);
+//        fullscreen(false);
     }
 
     public void hideMenu() {

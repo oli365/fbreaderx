@@ -78,10 +78,10 @@ public class TOCFragment extends Fragment implements IRefresh {
     }
 
     private void initViewPager() {
-        String[] titles = {"章节", "笔记"};
+        String[] titles = {"章节"};
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new CatalogsFragment());
-        fragments.add(new MarkersFragment());
+//        fragments.add(new MarkersFragment());
         adapter = new FragmentViewPagerAdapter(getChildFragmentManager());
         adapter.setTitles(Arrays.asList(titles));
         adapter.setFragments(fragments);

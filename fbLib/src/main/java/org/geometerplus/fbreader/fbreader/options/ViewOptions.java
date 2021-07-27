@@ -22,7 +22,6 @@ package org.geometerplus.fbreader.fbreader.options;
 import org.geometerplus.zlibrary.core.library.ZLibrary;
 import org.geometerplus.zlibrary.core.options.*;
 import org.geometerplus.zlibrary.text.view.style.ZLTextStyleCollection;
-
 import org.geometerplus.fbreader.fbreader.FBView;
 
 public class ViewOptions {
@@ -48,7 +47,9 @@ public class ViewOptions {
         final int y = zlibrary.getHeightInPixels();
         final int horMargin = Math.min(dpi / 5, Math.min(x, y) / 30);
 
-        TwoColumnView = new ZLBooleanOption("Options", "TwoColumnView", x * x + y * y >= 42 * dpi * dpi);
+        //oli去掉2行显示默认配置
+//        TwoColumnView = new ZLBooleanOption("Options", "TwoColumnView", x * x + y * y >= 42 * dpi * dpi);
+        TwoColumnView = new ZLBooleanOption("Options", "TwoColumnView", true);
         LeftMargin = new ZLIntegerRangeOption("Options", "LeftMargin", 0, 100, (int) (horMargin*1.5));
         RightMargin = new ZLIntegerRangeOption("Options", "RightMargin", 0, 100, (int) (horMargin*1.5));
         TopMargin = new ZLIntegerRangeOption("Options", "TopMargin", 0, 100, (int) (horMargin*1.5));
