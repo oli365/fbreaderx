@@ -38,7 +38,6 @@ import org.geometerplus.android.fbreader.httpd.DataService;
 import org.geometerplus.android.fbreader.libraryService.BookCollectionShadow;
 import org.geometerplus.android.fbreader.sync.SyncOperations;
 import org.geometerplus.android.fbreader.tips.TipsActivity;
-import org.geometerplus.android.util.DeviceType;
 import org.geometerplus.android.util.SearchDialogUtil;
 import org.geometerplus.android.util.UIMessageUtil;
 import org.geometerplus.android.util.UIUtil;
@@ -77,6 +76,7 @@ import java.util.List;
 public class FBReader extends FBReaderMainActivity implements ZLApplicationWindow {
     public static final int RESULT_DO_NOTHING = RESULT_FIRST_USER;
     public static final int RESULT_REPAINT = RESULT_FIRST_USER + 1;
+    public static final String BUNDLE_KEY_QRCODELINK = "book_qrcode_link";
 
     public static Intent defaultIntent(Context context) {
         return new Intent(context, FBReader.class)
@@ -89,6 +89,16 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
         final Intent intent = defaultIntent(context);
         FBReaderIntents.putBookExtra(intent, book);
         FBReaderIntents.putBookmarkExtra(intent, bookmark);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    public static void openBook(Context context, Book book, Bookmark bookmark,String bookQrcodeLink) {
+        FBReaderApplication.init(context);
+        final Intent intent = defaultIntent(context);
+        FBReaderIntents.putBookExtra(intent, book);
+        FBReaderIntents.putBookmarkExtra(intent, bookmark);
+        intent.putExtra(BUNDLE_KEY_QRCODELINK,bookQrcodeLink);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
@@ -217,7 +227,7 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        bookQrcodeLink = getIntent().getStringExtra("book_qrcode_link");
+        bookQrcodeLink = getIntent().getStringExtra(BUNDLE_KEY_QRCODELINK);
         bindService(new Intent(this, DataService.class), DataConnection, DataService.BIND_AUTO_CREATE);
 
         final Config config = Config.Instance();
