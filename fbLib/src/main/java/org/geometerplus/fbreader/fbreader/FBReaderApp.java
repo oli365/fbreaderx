@@ -19,6 +19,8 @@
 
 package org.geometerplus.fbreader.fbreader;
 
+import com.fbreader.common.FBReaderHelper;
+
 import org.fbreader.util.ComparisonUtil;
 import org.geometerplus.fbreader.book.Author;
 import org.geometerplus.fbreader.book.Book;
@@ -735,4 +737,35 @@ public final class FBReaderApp extends ZLApplication {
             getViewWidget().repaint();
         }
     }
+
+    public interface OnFinishFBReaderListener{
+        void finishFBReader();
+    }
+
+    public interface OnBackHomeListener{
+        void backHome();
+    }
+
+    public void setOnFinishFBReaderListener(OnFinishFBReaderListener onFinishFBReaderListener) {
+        this.onFinishFBReaderListener = onFinishFBReaderListener;
+    }
+
+    public void setOnBackHomeListener(OnBackHomeListener onBackHomeListener) {
+        this.onBackHomeListener = onBackHomeListener;
+    }
+
+    public void onBackHome(){
+        if(onBackHomeListener != null){
+            onBackHomeListener.backHome();
+        }
+    }
+
+    public void onFinishFBReader(){
+        if(onFinishFBReaderListener != null){
+            onFinishFBReaderListener.finishFBReader();
+        }
+    }
+
+    OnFinishFBReaderListener onFinishFBReaderListener;
+    OnBackHomeListener onBackHomeListener;
 }

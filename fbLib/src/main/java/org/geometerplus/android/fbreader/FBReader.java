@@ -400,7 +400,7 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
             @Override
             public void onClick(View v) {
                 finish();
-                fbReaderHelper.onFinishFBReader();
+                myFBReaderApp.onFinishFBReader();
             }
         });
         findViewById(R.id.iv_get_book_qrcode).setOnClickListener(new View.OnClickListener() {
@@ -414,7 +414,7 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
         findViewById(R.id.iv_back_home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fbReaderHelper.onBackHome();
+                myFBReaderApp.onBackHome();
             }
         });
 
