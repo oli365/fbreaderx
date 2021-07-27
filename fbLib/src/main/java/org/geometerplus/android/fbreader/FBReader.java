@@ -414,6 +414,8 @@ public class FBReader extends FBReaderMainActivity implements ZLApplicationWindo
         findViewById(R.id.iv_back_home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+                myFBReaderApp.onFinishFBReader();
                 myFBReaderApp.onBackHome();
             }
         });
